@@ -34,7 +34,7 @@ class Fleet extends Model
         {
             $punch->out_time = $this->ended_at;
         }
-        $this->punchOut();
+        //$this->punchOut();
         $this->ended_at = Carbon::now();
     }
     public function punches()
