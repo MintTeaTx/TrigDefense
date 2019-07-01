@@ -186,9 +186,17 @@ class FleetController extends Controller
         $parsedArray = [];
         foreach ($logarray as $entry)
         {
-            preg_match($regex,$entry,$values);
-            array_push($parsedArray, $values);
 
+            preg_match($regex,$entry,$values);
+            if(
+                !empty($values)
+                && array_key_exists('time', $values)
+                && array_key_exists('player', $values)
+                && array_key_exists('action', $values)
+            )
+            {
+                array_push($parsedArray, $values);
+            }
 
 
 
