@@ -182,11 +182,13 @@ class FleetController extends Controller
                 array_push($logArray, compact('player', 'action', 'time'));
             } else {
                 $tempString = $player." is unregistered, their duration was ".$start->diffForHumans($time,true);
-                dd($tempString);
+                //dd($tempString);
+                array_push($unregistered, $tempString);
+
             }
         }
-        dd($logArray);
-        return redirect()->back();
+       // dd($logArray);
+        return redirect()->back()->with($unregistered);
     }
     public function parseFleetLog(String $entry)
     {
