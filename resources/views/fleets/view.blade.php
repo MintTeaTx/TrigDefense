@@ -39,7 +39,7 @@
     <div class="box box-primary box-solid">
         <div class="box-header">
             <h3>Participants</h3>
-            <button type="button" class="btn btn-xs btn-box-tool" id="addLoot" data-toggle="modal" data-target="#addLootModal" data-placement="top" title="Add a new fitting">
+            <button type="button" class="btn btn-xs btn-box-tool" id="addLog" data-toggle="modal" data-target="#addLogModal" data-placement="top" title="Add a Log">
                 <span class="fa fa-plus-square"></span>
             </button>
         </div>
