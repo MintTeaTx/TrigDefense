@@ -156,9 +156,9 @@ class FleetController extends Controller
         foreach($fleetArray as $entry)
         {
             dd($entry);
-            $clocktime = $entry[1];
-            $player = $entry[2];
-            $action = $entry[3];
+            $clocktime = $entry['time'];
+            $player = $entry['player'];
+            $action = $entry['action'];
             $clock = Carbon::createFromTimeString($clocktime);
             $user = User::where('name', $player);
             $time = Carbon::create($start->year, $start->month,$start->day,$clock->hour,$clock->minute,$clock->second);
