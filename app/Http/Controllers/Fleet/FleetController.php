@@ -154,25 +154,36 @@ class FleetController extends Controller
        // dd($fleetArray);
         $start = Carbon::parse($fleet->created_at);
         $logArray =[];
+        $unregistered= [];
         foreach($fleetArray as $entry)
         {
-            dd($entry);
+
             $clocktime = $entry[1];
             $player = $entry[2];
             $action = $entry[3];
             $clock = Carbon::createFromTimeString($clocktime);
-            $user = User::where('name', $player);
-            $time = Carbon::create($start->year, $start->month,$start->day,$clock->hour,$clock->minute,$clock->second);
+            $time = Carbon::create($start->year, $start->month, $start->day, $clock->hour, $clock->minute, $clock->second);
 
-            if($action == "left")
-            {
-                //$fleet->punchInAt($time);
-            }
-            if($action == "joined")
-            {
-                //$fleet->punchOutAt($time);
-            }
-            array_push($logArray, compact('player','action','time'));
+
+
+            $logArray[$player] = array(
+                'action' => $action,
+                'time' => $time
+            );
+
+            /*
+            if($user = User::where('name', $player)->first()) {
+
+                if ($action == "left") {
+                    //$fleet->punchInAt($time, $user);
+                }
+                if ($action == "joined") {
+                    //$fleet->punchOutAt($time, $user);
+                }
+                array_push($logArray, compact('player', 'action', 'time'));
+            } else {
+                $tempString = $player." is unregistered, their duration was ".gmdate('H:i:s',$punch['duration'])
+            }*/
         }
         dd($logArray);
         return redirect()->back();
