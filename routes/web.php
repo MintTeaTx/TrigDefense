@@ -83,7 +83,7 @@ Route::get('/',
     ]);
     Route::post('/view/{id}/saveLog', [
         'as'   => 'fleet.saveLog',
-        'uses' => 'FleetController@saveFleetLoot',
+        'uses' => 'FleetController@saveFleetLog',
     ]);
 }
 );
