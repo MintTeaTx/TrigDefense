@@ -155,6 +155,7 @@ class FleetController extends Controller
         $logArray =[];
         foreach($fleetArray as $entry)
         {
+            dd($entry);
             $clocktime = $entry[1];
             $player = $entry[2];
             $action = $entry[3];
