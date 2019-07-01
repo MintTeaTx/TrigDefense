@@ -151,15 +151,15 @@ class FleetController extends Controller
 
         $fleet = Fleet::find($fleetid);
         $fleetArray = $this->parseFleetLog($request->fleetlog);
-        dd($fleetArray);
+       // dd($fleetArray);
         $start = Carbon::parse($fleet->created_at);
         $logArray =[];
         foreach($fleetArray as $entry)
         {
 
-            $clocktime = $entry[0];
-            $player = $entry[1];
-            $action = $entry[2];
+            $clocktime = $entry[1];
+            $player = $entry[2];
+            $action = $entry[3];
             $clock = Carbon::createFromTimeString($clocktime);
             $user = User::where('name', $player);
             $time = Carbon::create($start->year, $start->month,$start->day,$clock->hour,$clock->minute,$clock->second);
