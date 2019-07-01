@@ -167,8 +167,7 @@ class FleetController extends Controller
 
 
             $logArray[$player] = array(
-                'action' => $action,
-                'time' => $time
+                $action => $time
             );
 
             /*
