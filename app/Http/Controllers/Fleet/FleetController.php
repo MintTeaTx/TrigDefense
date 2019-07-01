@@ -181,7 +181,7 @@ class FleetController extends Controller
                 }
                 array_push($logArray, compact('player', 'action', 'time'));
             } else {
-                $tempString = $player." is unregistered, their duration was ".$start->diffForHumans($time,CarbonInterface::DIFF_ABSOLUTE);
+                $tempString = $player." is unregistered, their duration was ".$start->diffForHumans($time,true);
                 dd($tempString);
             }
         }
