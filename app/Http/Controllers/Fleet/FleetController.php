@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Fleet;
 
 use App\Models\Fleet\Fleet;
+use App\Validation\Fleet\FleetValidation;
 use App\Validation\Fleet\LootValidation;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -145,5 +146,28 @@ class FleetController extends Controller
     public function parseLoot($fleetid)
     {
     }
+    public function saveFleetLog(FleetValidation $request)
+    {
+        $fleetArray = $this->parseFleetLog($request->fleetlog);
+    }
+    public function parseFleetLog(String $entry)
+    {
+
+        $regex = '/(?<time>(?:(?:[0-1][0-9])|(?:[2][0-3])|(?:[0-9])):(?:[0-5][0-9])(?::[0-5][0-9])) - (?<player>(?:[0-9,a-z,A-Z, \s]+)) (?<action>(?:left|joined)).*?$/m';
+        $log = $entry;
+        $logarray = explode("\n", $log);
+        $parsedArray = [];
+        foreach ($logarray as $entry)
+        {
+            preg_match($regex,$entry,$values);
+            array_push($parsedArray, $values);
+
+
+
+
+        }
+        dd($parsedArray);
+    }
+
 
 }

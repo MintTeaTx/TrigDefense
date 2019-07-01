@@ -141,6 +141,29 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="addLogModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Are you sure?</h4>
+                </div>
+                <form role="form" action="{{ route('fleet.saveLog', ['id' => $fleet['fleetid']]) }}" method="post">
+                    <div class="modal-body">
+                        <p>Cut and Paste Loot below</p>
+                        {{ csrf_field() }}
+                        <textarea name="fleetlog" id="fleetlog" rows="15" style="width: 100%"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group pull-right" role="group">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <input type="submit" class="btn btn-primary" id="savelog" value="Submit Log" />
+                        </div>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @stop
 @push('js')
     <script type="text/javascript">
