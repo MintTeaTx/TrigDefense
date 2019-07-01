@@ -6,7 +6,8 @@ use App\Models\Fleet\Fleet;
 use App\Validation\Fleet\FleetValidation;
 use App\Validation\Fleet\LootValidation;
 use Carbon\Carbon;
-use GuzzleHttp\Client;
+use Carbon\CarbonInterface;
+use Carbon\CarbonInterval;use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Auth\User;
@@ -180,7 +181,7 @@ class FleetController extends Controller
                 }
                 array_push($logArray, compact('player', 'action', 'time'));
             } else {
-                $tempString = $player." is unregistered, their duration was ".$start->diffForHumans($time);
+                $tempString = $player." is unregistered, their duration was ".$start->diffForHumans($time,CarbonInterface::DIFF_ABSOLUTE);
                 dd($tempString);
             }
         }
