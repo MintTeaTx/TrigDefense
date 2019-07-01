@@ -151,7 +151,7 @@ class FleetController extends Controller
 
         $fleet = Fleet::find($fleetid);
         $fleetArray = $this->parseFleetLog($request->fleetlog);
-        dd($fleetArray);
+        //dd($fleetArray);
         $start = Carbon::parse($fleet->created_at);
         $logArray =[];
         foreach($fleetArray as $entry)
