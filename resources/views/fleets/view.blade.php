@@ -44,6 +44,11 @@
             </button>
         </div>
         <div class="box-body">
+            @if(isset($unregistered))
+                @foreach($unregistered as $line)
+                    {{$line}}<br>
+                @endforeach
+            @endif
             <table class="table">
                 <thead>
                 <tr>
