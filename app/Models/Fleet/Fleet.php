@@ -108,5 +108,25 @@ class Fleet extends Model
         $punch->save();
         return redirect()->back();
     }
+    public function punchInAt(Carbon $time, User $user)
+    {
+        $in_time = $time;
+        $user = auth()->user();
+        $this->punches()->create(['user_id' => $user->id, 'fleet_id'=>$this->id]);
+        $punch = Punch::where(['user_id' => $user->id, 'fleet_id'=>$this->id])->latest()->get()->first();
+        $punch->in_time = $in_time;
+        $punch->user()->associate($user);
+        $punch->fleet()->associate($this);
+        $punch->save();
+    }
 
+    public function punchOutAt(Carbon $time, User $user)
+    {
+        $out_time = $time;
+        $user = auth()->user();
+        $punch = Punch::where(['user_id' => $user->id, 'fleet_id'=>$this->id])->latest()->get()->first();
+        $punch->out_time = $out_time;
+        $punch->save();
+
+    }
 }

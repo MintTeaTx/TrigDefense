@@ -146,9 +146,34 @@ class FleetController extends Controller
     public function parseLoot($fleetid)
     {
     }
-    public function saveFleetLog(FleetValidation $request)
+    public function saveFleetLog(FleetValidation $request, $fleetid)
     {
+
+        $fleet = Fleet::find($fleetid);
         $fleetArray = $this->parseFleetLog($request->fleetlog);
+        $start = Carbon::parse($fleet->created_at);
+        $logArray =[];
+        foreach($fleetArray as $entry)
+        {
+            $clocktime = $entry[1];
+            $player = $entry[2];
+            $action = $entry[3];
+            $clock = Carbon::createFromTimeString($clocktime);
+            $user = User::where('name', $player);
+            $time = Carbon::create($start->year, $start->month,$start->day,$clock->hour,$clock->minute,$clock->second);
+
+            if($action == "left")
+            {
+                //$fleet->punchInAt($time);
+            }
+            if($action == "joined")
+            {
+                //$fleet->punchOutAt($time);
+            }
+            array_push($logArray, compact('player','action','time'));
+        }
+        dd($logArray);
+        return redirect()->back();
     }
     public function parseFleetLog(String $entry)
     {
