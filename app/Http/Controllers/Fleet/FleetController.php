@@ -191,7 +191,8 @@ class FleetController extends Controller
 
 
         }
-        dd($parsedArray);
+        //dd($parsedArray);
+        return $logarray;
     }
 
 
