@@ -169,7 +169,7 @@ class FleetController extends Controller
 
             $logArray[$player][$action]=$time;
 
-            /*
+
             if($user = User::where('name', $player)->first()) {
 
                 if ($action == "left") {
@@ -180,8 +180,9 @@ class FleetController extends Controller
                 }
                 array_push($logArray, compact('player', 'action', 'time'));
             } else {
-                $tempString = $player." is unregistered, their duration was ".gmdate('H:i:s',$punch['duration'])
-            }*/
+                $tempString = $player." is unregistered, their duration was ".gmdate('H:i:s',$start->diffForHumans($time));
+                dd($tempString);
+            }
         }
         dd($logArray);
         return redirect()->back();
