@@ -151,7 +151,7 @@ class FleetController extends Controller
 
         $fleet = Fleet::find($fleetid);
         $fleetArray = $this->parseFleetLog($request->fleetlog);
-        dd($fleetArray);
+        //dd($fleetArray);
         $start = Carbon::parse($fleet->created_at);
 
         $logArray =[];
@@ -167,9 +167,7 @@ class FleetController extends Controller
 
 
 
-            $logArray[$player] = array(
-                $action => $time
-            );
+            $logArray[$player][$action]=$time;
 
             /*
             if($user = User::where('name', $player)->first()) {
