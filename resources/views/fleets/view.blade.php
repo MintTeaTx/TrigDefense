@@ -44,8 +44,8 @@
             </button>
         </div>
         <div class="box-body">
-            @if(isset($unregistered))
-                @foreach($unregistered as $line)
+            @if(isset($fleet->participants))
+                @foreach($fleet-> as $line)
                     {{$line}}<br>
                 @endforeach
             @endif

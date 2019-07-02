@@ -48,9 +48,10 @@ class FleetController extends Controller
         $duration = $fleetModel->duration();
         $count = $fleetModel->participants->count();
         $loot = $fleetModel->loot;
+        $participants = $fleetModel->participants;
 
         $fleet = compact(
-            'fcid','fcname','complete','started','ended','duration','loot','fleetname','fleetid','count'
+            'fcid','fcname','complete','started','ended','duration','loot','fleetname','fleetid','count','participants'
             );
 
 
@@ -167,10 +168,25 @@ class FleetController extends Controller
             $time = Carbon::create($start->year, $start->month, $start->day, $clock->hour, $clock->minute, $clock->second);
 
 
+            //$duration = $start->diffInSeconds($time,true);
 
-            $logArray[$player][$action]=$time;
 
+            if(!isset($logArray[$player]['duration'])) {
+                $logArray[$player]['duration'] = 0;
+            }
 
+                if($action == 'joined')
+                {
+                    $logArray[$player]['joined'] = $time;
+                }
+                if($action == 'left')
+                {
+                    $logArray[$player]['left'] = $time;
+                    $durationInSeconds = $logArray[$player]['joined']->diffInSeconds($logArray[$player]['left']);
+                    $logArray[$player]['duration'] = $durationInSeconds;
+                }
+
+            /*
             if($user = User::where('name', $player)->first()) {
 
                 if ($action == "left") {
@@ -179,15 +195,19 @@ class FleetController extends Controller
                 if ($action == "joined") {
                     //$fleet->punchOutAt($time, $user);
                 }
+            */
                 array_push($logArray, compact('player', 'action', 'time'));
+                /*
             } else {
                 $tempString = $player." is unregistered, their duration was ".$start->diffForHumans($time,true);
                 //dd($tempString);
                 array_push($unregistered, $tempString);
 
-            }
+            }*/
         }
-       // dd($logArray);
+        $fleet->participants = $logArray;
+        dd($fleet);
+        // dd($logArray);
         return redirect()->back()->with($unregistered);
     }
     public function parseFleetLog(String $entry)

@@ -12,7 +12,8 @@ class Fleet extends Model
     protected $increments = true;
     protected $table = 'fleet';
     protected $casts = [
-        'loot' => 'array'
+        'loot' => 'array',
+        'participants' => 'array'
     ];
     protected $fillable = [
         'fc', 'fleet_name','active','complete','ended_at'
