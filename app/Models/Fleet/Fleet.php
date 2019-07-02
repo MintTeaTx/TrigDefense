@@ -42,10 +42,11 @@ class Fleet extends Model
     {
         return $this->hasMany(Punch::class);
     }
+    /*
     public function participants()
     {
         return $this->belongsToMany(User::class)->using( Punch::class);
-    }
+    }*/
     public function hasMember($userid)
     {
         //$member = $this->participants()->where('user_id', $userid)->first();
